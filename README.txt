@@ -20,7 +20,7 @@ development to GitHub and fixes some small problems.
 
 Copyright:: Copyright (c) 2005 - 2010 by Austin Ziegler and Matt Lyon
 Version::   1.4.1
-Homepage::  http://rubyforge.org/projects/color/
+Homepage::  http://rubyforge.org/projects/color_lib/
 Licence::   MIT-Style; see Licence.txt
 
 ColorLib::Palette was developed based on techniques described by Andy "Malarkey"
@@ -29,4 +29,4 @@ by Patrick Fitzgerald of BarelyFitz[3] in PHP.
 
 [1] http://www.stuffandnonsense.co.uk/archives/creating_colour_palettes.html 
 [2] http://slayeroffice.com/tools/color_palette/
-[3] http://www.barelyfitz.com/projects/csscolor/
+[3] http://www.barelyfitz.com/projects/csscolor_lib/

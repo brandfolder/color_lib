@@ -10,7 +10,7 @@
 # Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
 #++
 
-require 'color/palette'
+require 'color_lib/palette'
 
 # A class that can read an Adobe ColorLib palette file (used for Photoshop
 # swatches) and provide a Hash-like interface to the contents. Not all

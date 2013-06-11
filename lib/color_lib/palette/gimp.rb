@@ -10,7 +10,7 @@
 # Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
 #++
 
-require 'color/palette'
+require 'color_lib/palette'
 
 # A class that can read a GIMP (GNU Image Manipulation Program) palette file
 # and provide a Hash-like interface to the contents. GIMP colour palettes

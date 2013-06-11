@@ -16,7 +16,7 @@ require 'hoe'
 
 $LOAD_PATH.unshift('lib')
 
-require 'color'
+require 'color_lib'
 
 PKG_NAME    = 'color'
 PKG_VERSION = ColorLib::COLOR_VERSION

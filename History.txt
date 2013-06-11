@@ -55,7 +55,7 @@
   warning will be printed on every use of the old colours. In version 1.5,
   the backwards compatible support for colours like ColorLib::Red will be
   removed completely.
-* Added the ColorLib::CSS module, color/css or ColorLib::CSS that provides a name
+* Added the ColorLib::CSS module, color_lib/css or ColorLib::CSS that provides a name
   lookup of ColorLib::RGB-namespaced constants with ColorLib::CSS[name]. Most of
   these colours (which are mirrored from the ColorLib::RGB default colours) are
   only "officially" recognised under the CSS3 colour module or SVG.
@@ -76,7 +76,7 @@
   conversions from YIQ to other colour spaces.
 
 == color-tools 1.1.0
-* Added color/palette/gimp to support the reading and use of GIMP color
+* Added color_lib/palette/gimp to support the reading and use of GIMP color
   palettes.
 
 == color-tools 1.0.0

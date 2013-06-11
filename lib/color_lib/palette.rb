@@ -10,7 +10,7 @@
 # Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
 #++
 
-require 'color'
+require 'color_lib'
 
 module ColorLib::Palette
 end

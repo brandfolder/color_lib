@@ -10,7 +10,7 @@
 # Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
 #++
 
-require 'color'
+require 'color_lib'
 
 # This namespace contains some CSS colour names.
 module ColorLib::CSS

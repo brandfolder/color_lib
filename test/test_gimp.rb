@@ -13,8 +13,8 @@
 
 $LOAD_PATH.unshift("#{File.dirname(__FILE__)}/../lib") if __FILE__ == $0
 require 'test/unit'
-require 'color'
-require 'color/palette/gimp'
+require 'color_lib'
+require 'color_lib/palette/gimp'
 
 module TestColorLib
   module TestPalette

@@ -450,4 +450,4 @@ class ColorLib::RGB
   end
 end
 
-require 'color/rgb-colors'
+require 'color_lib/rgb-colors'

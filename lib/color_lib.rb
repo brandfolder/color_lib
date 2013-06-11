@@ -91,12 +91,12 @@ module ColorLib
   end
 end
 
-require 'color/rgb'
-require 'color/cmyk'
-require 'color/grayscale'
-require 'color/hsl'
-require 'color/yiq'
-require 'color/rgb/metallic'
+require 'color_lib/rgb'
+require 'color_lib/cmyk'
+require 'color_lib/grayscale'
+require 'color_lib/hsl'
+require 'color_lib/yiq'
+require 'color_lib/rgb/metallic'
 
 module ColorLib
   def self.const_missing(name) #:nodoc:

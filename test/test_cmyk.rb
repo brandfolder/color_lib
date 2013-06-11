@@ -13,7 +13,7 @@
 
 $LOAD_PATH.unshift("#{File.dirname(__FILE__)}/../lib") if __FILE__ == $0
 require 'test/unit'
-require 'color'
+require 'color_lib'
 
 module TestColorLib
   class TestCMYK < Test::Unit::TestCase
