@@ -11,7 +11,7 @@
 #++
 
 require 'rubygems'
-require 'hanna/rdoctask'
+require 'rdoc/task'
 require 'hoe'
 
 $LOAD_PATH.unshift('lib')
