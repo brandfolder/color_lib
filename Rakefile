@@ -28,7 +28,7 @@ Hoe.spec PKG_NAME do
   self.version = PKG_VERSION
 
 # self.rubyforge_name = PKG_NAME
-
+  self.name = PKG_NAME
   developer "Austin Ziegler", "austin@rubyforge.org" 
   developer "Matt Lyon", "matt@postsomnia.com" 
 
