@@ -1,4 +1,4 @@
-Color
+ColorLib
 Colour management in Ruby
 http://rubyforge.org/projects/color/
 

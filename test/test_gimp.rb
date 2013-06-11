@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #--
-# Color
+# ColorLib
 # Colour management with Ruby
 # http://rubyforge.org/projects/color
 #   Version 1.5.0
@@ -16,17 +16,17 @@ require 'test/unit'
 require 'color'
 require 'color/palette/gimp'
 
-module TestColor
+module TestColorLib
   module TestPalette
     class TestGimp < Test::Unit::TestCase
-      include Color::Palette
+      include ColorLib::Palette
 
       GIMP_W3C = <<-EOS
 GIMP Palette
-Name: W3C Named Colors
+Name: W3C Named ColorLibs
 Columns: 2
 #
-# ColorZilla W3C Named Colors
+# ColorLibZilla W3C Named ColorLibs
 #
 255 255 255 	White
 255 255 0 	Yclow	
@@ -58,7 +58,7 @@ Columns: 2
       def test_each
         @gimp = Gimp.new(GIMP_W3C)
         assert_equal(16, @gimp.instance_variable_get(:@colors).size)
-        @gimp.each { |c| assert_kind_of(Color::RGB, c) }
+        @gimp.each { |c| assert_kind_of(ColorLib::RGB, c) }
       end
 
       def test_each_name
@@ -68,7 +68,7 @@ Columns: 2
         @gimp.each_name { |color_name, color_set|
           assert_kind_of(Array, color_set)
           color_set.each { |c|
-            assert_kind_of(Color::RGB, c)
+            assert_kind_of(ColorLib::RGB, c)
           }
         }
       end
@@ -80,9 +80,9 @@ Columns: 2
           end
         end
         assert_nothing_raised { @gimp = Gimp.from_file(@filename) }
-        assert_equal(Color::RGB::White, @gimp[0])
-        assert_equal(Color::RGB::White, @gimp["White"][0])
-        assert_equal([Color::RGB::White, Color::RGB::Black],
+        assert_equal(ColorLib::RGB::White, @gimp[0])
+        assert_equal(ColorLib::RGB::White, @gimp["White"][0])
+        assert_equal([ColorLib::RGB::White, ColorLib::RGB::Black],
                      @gimp.values_at(0, -1))
         assert_equal(16, @gimp.size)
       end
@@ -94,7 +94,7 @@ Columns: 2
 
       def test_name
         @gimp = Gimp.new(GIMP_W3C)
-        assert_equal("W3C Named Colors", @gimp.name)
+        assert_equal("W3C Named ColorLibs", @gimp.name)
       end
     end
   end

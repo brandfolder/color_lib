@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #--
-# Color
+# ColorLib
 # Colour management with Ruby
 # http://rubyforge.org/projects/color
 #   Version 1.5.0

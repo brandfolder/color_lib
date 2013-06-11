@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #--
-# Color
+# ColorLib
 # Colour management with Ruby
 # http://rubyforge.org/projects/color
 #   Version 1.5.0
@@ -16,14 +16,14 @@ require 'test/unit'
 require 'color'
 require 'color/css'
 
-module TestColor
+module TestColorLib
   class TestCSS < Test::Unit::TestCase
     def test_index
-      assert_equal(Color::RGB::AliceBlue, Color::CSS[:aliceblue])
-      assert_equal(Color::RGB::AliceBlue, Color::CSS["AliceBlue"])
-      assert_equal(Color::RGB::AliceBlue, Color::CSS["aliceBlue"])
-      assert_equal(Color::RGB::AliceBlue, Color::CSS["aliceblue"])
-      assert_equal(Color::RGB::AliceBlue, Color::CSS[:AliceBlue])
+      assert_equal(ColorLib::RGB::AliceBlue, ColorLib::CSS[:aliceblue])
+      assert_equal(ColorLib::RGB::AliceBlue, ColorLib::CSS["AliceBlue"])
+      assert_equal(ColorLib::RGB::AliceBlue, ColorLib::CSS["aliceBlue"])
+      assert_equal(ColorLib::RGB::AliceBlue, ColorLib::CSS["aliceblue"])
+      assert_equal(ColorLib::RGB::AliceBlue, ColorLib::CSS[:AliceBlue])
     end
   end
 end

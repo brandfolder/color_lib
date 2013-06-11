@@ -1,6 +1,6 @@
 #! /usr/bin/env rake
 #--
-# Color
+# ColorLib
 # Colour Management with Ruby
 # http://rubyforge.org/projects/color
 #
@@ -19,7 +19,7 @@ $LOAD_PATH.unshift('lib')
 require 'color'
 
 PKG_NAME    = 'color'
-PKG_VERSION = Color::COLOR_VERSION
+PKG_VERSION = ColorLib::COLOR_VERSION
 PKG_DIST    = "#{PKG_NAME}-#{PKG_VERSION}"
 PKG_TAR     = "pkg/#{PKG_DIST}.tar.gz"
 MANIFEST    = File.read("Manifest.txt").split
@@ -49,7 +49,7 @@ Hoe.spec PKG_NAME do
   self.need_tar        = false
 end
 
-desc "Build a Color .tar.gz distribution."
+desc "Build a ColorLib .tar.gz distribution."
 task :tar => [ PKG_TAR ]
 file PKG_TAR => [ :test ] do |t|
   require 'archive/tar/minitar'

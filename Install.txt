@@ -1,14 +1,14 @@
-== Installing Color
+== Installing ColorLib
 
-Color may be installed with:
+ColorLib may be installed with:
 
   % ruby setup.rb
 
-Alternatively, the RubyGems version of Color may be installed from the usual
+Alternatively, the RubyGems version of ColorLib may be installed from the usual
 sources.
 
 == Copyright
-  Color
+  ColorLib
   Colour Management with Ruby
   http://rubyforge.org/projects/color
 
