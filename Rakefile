@@ -18,7 +18,7 @@ $LOAD_PATH.unshift('lib')
 
 require 'color_lib'
 
-PKG_NAME    = 'color'
+PKG_NAME    = 'color_lib'
 PKG_VERSION = ColorLib::COLOR_VERSION
 PKG_DIST    = "#{PKG_NAME}-#{PKG_VERSION}"
 PKG_TAR     = "pkg/#{PKG_DIST}.tar.gz"
@@ -32,7 +32,7 @@ Hoe.spec PKG_NAME do
   developer "Austin Ziegler", "austin@rubyforge.org" 
   developer "Matt Lyon", "matt@postsomnia.com" 
 
-  self.url = %W(http://color.rubyforge.org/ http://github.com/halostatue/color)
+  self.url = %W(http://github.com/rurabe/color_lib)
 
   self.summary = "Colour management with Ruby"
   self.changes = paragraphs_of(self.history_file, 0..1).join("\n\n")

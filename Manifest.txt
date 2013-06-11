@@ -4,7 +4,7 @@ Licence.txt
 Manifest.txt
 README.txt
 Rakefile
-lib/color.rb
+lib/color_lib.rb
 lib/color_lib/cmyk.rb
 lib/color_lib/css.rb
 lib/color_lib/grayscale.rb
