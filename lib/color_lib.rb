@@ -21,6 +21,7 @@ module ColorLib
   class CMYK; end
   class GrayScale; end
   class YIQ; end
+  class Pantone; end
 
   # The maximum "resolution" for colour math; if any value is less than or
   # equal to this value, it is treated as zero.
@@ -97,6 +98,7 @@ require 'color_lib/grayscale'
 require 'color_lib/hsl'
 require 'color_lib/yiq'
 require 'color_lib/rgb/metallic'
+require 'color_lib/pantone'
 
 module ColorLib
   def self.const_missing(name) #:nodoc:
