@@ -1,4 +1,4 @@
-class ColorLib::Pantone < ColorLib::RGB
+class ColorLib::Pantone
 
   def self.from_value(string)
     string.gsub!(/c/i,'')
