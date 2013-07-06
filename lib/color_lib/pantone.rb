@@ -2,7 +2,7 @@ class ColorLib::Pantone
 
   def self.from_value(string)
     string.gsub!(/c/i,'')
-    hex = VALUES[VALUES.keys.find{ |key| /#{string}/ === key }]
+    hex = VALUES[VALUES.keys.find{ |key| /^#{string}$/ === key }]
     ColorLib::RGB.from_html(hex)
   end
 
