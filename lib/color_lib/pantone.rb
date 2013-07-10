@@ -1,11 +1,12 @@
 class ColorLib::Pantone
 
   def self.from_value(string)
-    if string.length > 0
-        string.gsub!(/c/i,'')
-        hex = VALUES[VALUES.keys.find{ |key| /^#{string}$/ === key }]
-        ColorLib::RGB.from_html(hex)
-    end
+    ColorLib::RGB.from_html( match(string) ) if string.length > 0
+  end
+
+  def self.match(string)
+    string.gsub!(/[c\ \-]/i,'')
+    VALUES[VALUES.keys.find{ |key| /^#{string}$/ === key }]
   end
 
   VALUES = {
