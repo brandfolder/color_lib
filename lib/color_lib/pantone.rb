@@ -7,7 +7,7 @@ class ColorLib::Pantone
 
   def self.match(value)
     value.to_s.gsub!(/[c\ \-]/i,'')
-    VALUES[VALUES.keys.find{ |key| /^#{string}$/ === key }]
+    VALUES[VALUES.keys.find{ |key| /^#{value}$/ === key }]
   end
 
   VALUES = {
