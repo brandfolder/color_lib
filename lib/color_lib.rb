@@ -5,7 +5,7 @@
 # ColorLib
 # Colour management with Ruby
 # http://rubyforge.org/projects/color
-#   Version 1.4.1
+#   Version 1.4.2
 #
 # Licensed under a MIT-style licence. See Licence.txt in the main
 # distribution for full licensing information.
@@ -15,7 +15,7 @@
 
 # = Colour Management with Ruby
 module ColorLib
-  COLOR_VERSION = '1.4.1'
+  COLOR_VERSION = '1.4.2'
 
   class RGB; end
   class CMYK; end
