@@ -6,8 +6,8 @@ require 'color_lib/version'
 Gem::Specification.new do |spec|
   spec.name        = "color_lib"
   spec.version     = ColorLib::VERSION
-  spec.authors     = ["Jason Waldrip"]
-  spec.email       = ["jason@waldrip.net"]
+  spec.authors     = ["Brandfolder, Inc."]
+  spec.email       = ["developers@brandfolder.com"]
   spec.summary     = %q{A lib for colors}
   spec.description = %q{A lib for working with colors in ruby}
   spec.homepage    = "https://github.com/brandfolder/color_lib"
