@@ -12,3 +12,11 @@
 *.o
 *.a
 mkmf.log
+*.swp
+html
+doc
+pkg
+publish
+coverage
+coverage.info
+type-lists
