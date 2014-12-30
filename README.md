@@ -1,6 +1,8 @@
 # ColorLib [![Build Status](https://travis-ci.org/brandfolder/color_lib.svg?branch=master)](https://travis-ci.org/brandfolder/color_lib)
 
-A lib for colors.## Installation
+A lib for colors.
+
+## Installation
 
 Add this line to your application's Gemfile:
 
