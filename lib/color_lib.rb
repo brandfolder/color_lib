@@ -1,7 +1,5 @@
 require "color_lib/version"
 
-puts 'loaded'
-
 module ColorLib
   COLOR_VERSION = VERSION
 
