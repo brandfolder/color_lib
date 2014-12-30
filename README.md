@@ -1,6 +1,6 @@
 # ColorLib
 
-TODO: Write a gem description
+A lib for colors.
 
 ## Installation
 
@@ -18,13 +18,9 @@ Or install it yourself as:
 
     $ gem install color_lib
 
-## Usage
-
-TODO: Write usage instructions here
-
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/color_lib/fork )
+1. Fork it ( https://github.com/brandfolder/color_lib/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
