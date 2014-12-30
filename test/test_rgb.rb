@@ -1,22 +1,11 @@
-#!/usr/bin/env ruby
-#--
-# ColorLib
-# Colour management with Ruby
-# http://rubyforge.org/projects/color
-#   Version 1.5.0
-#
-# Licensed under a MIT-style licence. See Licence.txt in the main
-# distribution for full licensing information.
-#
-# Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
-#++
-
-$LOAD_PATH.unshift("#{File.dirname(__FILE__)}/../lib") if __FILE__ == $0
-require 'test/unit'
+require 'minitest/autorun'
+require 'test/unit/assertions'
 require 'color_lib'
 
 module TestColorLib
-  class TestRGB < Test::Unit::TestCase
+  class TestRGB < Minitest::Test
+    include Test::Unit::Assertions
+
     def test_adjust_brightness
       assert_equal("#1a1aff", ColorLib::RGB::Blue.adjust_brightness(10).html)
       assert_equal("#0000e6", ColorLib::RGB::Blue.adjust_brightness(-10).html)
@@ -40,11 +29,11 @@ module TestColorLib
       assert_in_delta(100, red.red_p, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(255, red.red, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(1.0, red.r, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { red.red_p = 33 }
+      red.red_p = 33
       assert_in_delta(0.33, red.r, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { red.red = 330 }
+      red.red = 330
       assert_in_delta(1.0, red.r, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { red.r = -3.3 }
+      red.r = -3.3
       assert_in_delta(0.0, red.r, ColorLib::COLOR_TOLERANCE)
     end
 
@@ -53,11 +42,11 @@ module TestColorLib
       assert_in_delta(1.0, lime.g, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(100, lime.green_p, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(255, lime.green, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { lime.green_p = 33 }
+      lime.green_p = 33
       assert_in_delta(0.33, lime.g, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { lime.green = 330 }
+      lime.green = 330
       assert_in_delta(1.0, lime.g, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { lime.g = -3.3 }
+      lime.g = -3.3
       assert_in_delta(0.0, lime.g, ColorLib::COLOR_TOLERANCE)
     end
 
@@ -66,11 +55,11 @@ module TestColorLib
       assert_in_delta(1.0, blue.b, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(255, blue.blue, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(100, blue.blue_p, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { blue.blue_p = 33 }
+      blue.blue_p = 33
       assert_in_delta(0.33, blue.b, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { blue.blue = 330 }
+      blue.blue = 330
       assert_in_delta(1.0, blue.b, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { blue.b = -3.3 }
+      blue.b = -3.3
       assert_in_delta(0.0, blue.b, ColorLib::COLOR_TOLERANCE)
     end
 
@@ -259,7 +248,7 @@ module TestColorLib
       # The following tests a bug reported by Adam Johnson on 29 October
       # 2010.
       hsl = ColorLib::HSL.new(262, 67, 42)
-      c = ColorLib::RGB.from_fraction(0.34496, 0.1386, 0.701399).to_hsl
+      c   = ColorLib::RGB.from_fraction(0.34496, 0.1386, 0.701399).to_hsl
       assert_in_delta hsl.h, c.h, ColorLib::COLOR_TOLERANCE, "Hue"
       assert_in_delta hsl.s, c.s, ColorLib::COLOR_TOLERANCE, "Saturation"
       assert_in_delta hsl.l, c.l, ColorLib::COLOR_TOLERANCE, "Luminance"
@@ -290,10 +279,10 @@ module TestColorLib
     end
 
     def test_add
-      assert_nothing_raised { ColorLib::RGB::Cyan + ColorLib::RGB::Yellow }
-      white = ColorLib::RGB::Cyan + ColorLib::RGB::Yellow 
+      ColorLib::RGB::Cyan + ColorLib::RGB::Yellow
+      white = ColorLib::RGB::Cyan + ColorLib::RGB::Yellow
       assert_not_nil(white)
-      assert_equal(ColorLib::RGB::White, white) 
+      assert_equal(ColorLib::RGB::White, white)
 
       c1 = ColorLib::RGB.new(0x80, 0x80, 0x00)
       c2 = ColorLib::RGB.new(0x45, 0x20, 0xf0)
@@ -304,7 +293,7 @@ module TestColorLib
 
     def test_subtract
       black = ColorLib::RGB::LightCoral - ColorLib::RGB::Honeydew
-      assert_equal(ColorLib::RGB::Black, black) 
+      assert_equal(ColorLib::RGB::Black, black)
 
       c1 = ColorLib::RGB.new(0x85, 0x80, 0x00)
       c2 = ColorLib::RGB.new(0x40, 0x20, 0xf0)
@@ -315,7 +304,7 @@ module TestColorLib
 
     def test_mean_grayscale
       c1        = ColorLib::RGB.new(0x85, 0x80, 0x00)
-      c1_max    = assert_nothing_raised { c1.max_rgb_as_greyscale }
+      c1_max    = c1.max_rgb_as_greyscale
       c1_max    = c1.max_rgb_as_greyscale
       c1_result = ColorLib::GrayScale.from_fraction(0x85 / 255.0)
 

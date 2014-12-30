@@ -1,22 +1,11 @@
-#!/usr/bin/env ruby
-#--
-# ColorLib
-# Colour management with Ruby
-# http://rubyforge.org/projects/color
-#   Version 1.5.0
-#
-# Licensed under a MIT-style licence. See Licence.txt in the main
-# distribution for full licensing information.
-#
-# Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
-#++
-
-$LOAD_PATH.unshift("#{File.dirname(__FILE__)}/../lib") if __FILE__ == $0
-require 'test/unit'
+require 'minitest/autorun'
+require 'test/unit/assertions'
 require 'color_lib'
 
 module TestColorLib
-  class TestYIQ < Test::Unit::TestCase
+  class TestYIQ < Minitest::Test
+    include Test::Unit::Assertions
+
     def setup
       @yiq = ColorLib::YIQ.from_fraction(0.1, 0.2, 0.3)
     end
@@ -28,22 +17,22 @@ module TestColorLib
     def test_i
       assert_in_delta(0.2, @yiq.i, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(0.2, @yiq.i, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @yiq.i = 0.5 }
+      @yiq.i = 0.5
       assert_in_delta(0.5, @yiq.i, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @yiq.i = 5 }
+      @yiq.i = 5
       assert_in_delta(1.0, @yiq.i, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @yiq.i = -5 }
+      @yiq.i = -5
       assert_in_delta(0.0, @yiq.i, ColorLib::COLOR_TOLERANCE)
     end
 
     def test_q
       assert_in_delta(0.3, @yiq.q, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(0.3, @yiq.q, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @yiq.q = 0.5 }
+      @yiq.q = 0.5
       assert_in_delta(0.5, @yiq.q, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @yiq.q = 5 }
+      @yiq.q = 5
       assert_in_delta(1.0, @yiq.q, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @yiq.q = -5 }
+      @yiq.q = -5
       assert_in_delta(0.0, @yiq.q, ColorLib::COLOR_TOLERANCE)
     end
 
@@ -58,11 +47,11 @@ module TestColorLib
     def test_y
       assert_in_delta(0.1, @yiq.y, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(0.1, @yiq.y, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @yiq.y = 0.5 }
+      @yiq.y = 0.5
       assert_in_delta(0.5, @yiq.y, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @yiq.y = 5 }
+      @yiq.y = 5
       assert_in_delta(1.0, @yiq.y, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @yiq.y = -5 }
+      @yiq.y = -5
       assert_in_delta(0.0, @yiq.y, ColorLib::COLOR_TOLERANCE)
     end
 

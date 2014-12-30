@@ -1,15 +1,3 @@
-#--
-# ColorLib
-# Colour management with Ruby
-# http://rubyforge.org/projects/color
-#
-#
-# Licensed under a MIT-style licence. See Licence.txt in the main
-# distribution for full licensing information.
-#
-# Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
-#++
-
 # An CMYK colour object. CMYK (cyan, magenta, yellow, and black) colours are
 # based on additive percentages of ink. A CMYK colour of (0.3, 0, 0.8, 0.3)
 # would be mixed from 30% cyan, 0% magenta, 80% yellow, and 30% black.
@@ -30,17 +18,17 @@ class ColorLib::CMYK
   def ==(other)
     other = other.to_cmyk
     other.kind_of?(ColorLib::CMYK) and
-    ((@c - other.c).abs <= ColorLib::COLOR_TOLERANCE) and
-    ((@m - other.m).abs <= ColorLib::COLOR_TOLERANCE) and
-    ((@y - other.y).abs <= ColorLib::COLOR_TOLERANCE) and
-    ((@k - other.k).abs <= ColorLib::COLOR_TOLERANCE)
+      ((@c - other.c).abs <= ColorLib::COLOR_TOLERANCE) and
+      ((@m - other.m).abs <= ColorLib::COLOR_TOLERANCE) and
+      ((@y - other.y).abs <= ColorLib::COLOR_TOLERANCE) and
+      ((@k - other.k).abs <= ColorLib::COLOR_TOLERANCE)
   end
 
   # Creates a CMYK colour object from fractional values 0..1.
   #
   #   ColorLib::CMYK.from_fraction(0.3, 0, 0.8, 0.3)
   def self.from_fraction(c = 0, m = 0, y = 0, k = 0)
-    colour = ColorLib::CMYK.new
+    colour   = ColorLib::CMYK.new
     colour.c = c
     colour.m = m
     colour.y = y
@@ -70,13 +58,13 @@ class ColorLib::CMYK
   # Present the colour as a DeviceCMYK fill colour string for PDF. This will
   # be removed from the default package in color-tools 2.0.
   def pdf_fill
-    PDF_FORMAT_STR % [ @c, @m, @y, @k, "k" ]
+    PDF_FORMAT_STR % [@c, @m, @y, @k, "k"]
   end
 
   # Present the colour as a DeviceCMYK stroke colour string for PDF. This
   # will be removed from the default package in color-tools 2.0.
   def pdf_stroke
-    PDF_FORMAT_STR % [ @c, @m, @y, @k, "K" ]
+    PDF_FORMAT_STR % [@c, @m, @y, @k, "K"]
   end
 
   # Present the colour as an RGB HTML/CSS colour string (e.g., "#aabbcc").
@@ -178,6 +166,7 @@ class ColorLib::CMYK
     g = 1.0 - [1.0, c + m + y + @k].min
     ColorLib::GrayScale.from_fraction(g)
   end
+
   alias to_greyscale to_grayscale
 
   def to_cmyk
@@ -185,7 +174,7 @@ class ColorLib::CMYK
   end
 
   def inspect
-    "CMYK [%.2f%%, %.2f%%, %.2f%%, %.2f%%]" % [ cyan, magenta, yellow, black ]
+    "CMYK [%.2f%%, %.2f%%, %.2f%%, %.2f%%]" % [cyan, magenta, yellow, black]
   end
 
   # Converts to RGB then YIQ.
@@ -202,15 +191,18 @@ class ColorLib::CMYK
   def cyan
     @c * 100.0
   end
+
   # Returns the cyan (C) component of the CMYK colour as a value in the
   # range 0.0 .. 1.0.
   def c
     @c
   end
+
   # Sets the cyan (C) component of the CMYK colour as a percentage value.
   def cyan=(cc)
     @c = ColorLib.normalize(cc / 100.0)
   end
+
   # Sets the cyan (C) component of the CMYK colour as a value in the range
   # 0.0 .. 1.0.
   def c=(cc)
@@ -222,15 +214,18 @@ class ColorLib::CMYK
   def magenta
     @m * 100.0
   end
+
   # Returns the magenta (M) component of the CMYK colour as a value in the
   # range 0.0 .. 1.0.
   def m
     @m
   end
+
   # Sets the magenta (M) component of the CMYK colour as a percentage value.
   def magenta=(mm)
     @m = ColorLib.normalize(mm / 100.0)
   end
+
   # Sets the magenta (M) component of the CMYK colour as a value in the
   # range 0.0 .. 1.0.
   def m=(mm)
@@ -242,15 +237,18 @@ class ColorLib::CMYK
   def yellow
     @y * 100.0
   end
+
   # Returns the yellow (Y) component of the CMYK colour as a value in the
   # range 0.0 .. 1.0.
   def y
     @y
   end
+
   # Sets the yellow (Y) component of the CMYK colour as a percentage value.
   def yellow=(yy)
     @y = ColorLib.normalize(yy / 100.0)
   end
+
   # Sets the yellow (Y) component of the CMYK colour as a value in the range
   # 0.0 .. 1.0.
   def y=(kk)
@@ -262,15 +260,18 @@ class ColorLib::CMYK
   def black
     @k * 100.0
   end
+
   # Returns the black (K) component of the CMYK colour as a value in the
   # range 0.0 .. 1.0.
   def k
     @k
   end
+
   # Sets the black (K) component of the CMYK colour as a percentage value.
   def black=(kk)
     @k = ColorLib.normalize(kk / 100.0)
   end
+
   # Sets the black (K) component of the CMYK colour as a value in the range
   # 0.0 .. 1.0.
   def k=(kk)

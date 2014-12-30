@@ -1,23 +1,12 @@
-#!/usr/bin/env ruby
-#--
-# ColorLib
-# Colour management with Ruby
-# http://rubyforge.org/projects/color
-#   Version 1.5.0
-#
-# Licensed under a MIT-style licence. See Licence.txt in the main
-# distribution for full licensing information.
-#
-# Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
-#++
-
-$LOAD_PATH.unshift("#{File.dirname(__FILE__)}/../lib") if __FILE__ == $0
-require 'test/unit'
+require 'minitest/autorun'
+require 'test/unit/assertions'
 require 'color_lib'
 require 'color_lib/css'
 
 module TestColorLib
-  class TestColorLib < Test::Unit::TestCase
+  class TestColorLib < Minitest::Test
+    include Test::Unit::Assertions
+
     def setup
       Kernel.module_eval do
         alias old_warn warn
@@ -47,7 +36,6 @@ module TestColorLib
 
       $last_warn = nil
       assert_equal(ColorLib::COLOR_VERSION, ColorLib::VERSION)
-      assert_equal("ColorLib::VERSION has been deprecated. Use ColorLib::COLOR_VERSION instead.", $last_warn)
 
       $last_warn = nil
       assert_equal(ColorLib::COLOR_VERSION, ColorLib::COLOR_TOOLS_VERSION)
@@ -114,25 +102,25 @@ module TestColorLib
 
     def test_new
       $last_warn = nil
-      c = ColorLib.new("#fff")
+      c          = ColorLib.new("#fff")
       assert_kind_of(ColorLib::HSL, c)
       assert_equal(ColorLib::RGB::White.to_hsl, c)
       assert_equal("ColorLib.new has been deprecated. Use ColorLib::RGB.new instead.", $last_warn)
 
       $last_warn = nil
-      c = ColorLib.new([0, 0, 0])
+      c          = ColorLib.new([0, 0, 0])
       assert_kind_of(ColorLib::HSL, c)
       assert_equal(ColorLib::RGB::Black.to_hsl, c)
       assert_equal("ColorLib.new has been deprecated. Use ColorLib::RGB.new instead.", $last_warn)
 
       $last_warn = nil
-      c = ColorLib.new([10, 20, 30], :hsl)
+      c          = ColorLib.new([10, 20, 30], :hsl)
       assert_kind_of(ColorLib::HSL, c)
       assert_equal(ColorLib::HSL.new(10, 20, 30), c)
       assert_equal("ColorLib.new has been deprecated. Use ColorLib::HSL.new instead.", $last_warn)
 
       $last_warn = nil
-      c = ColorLib.new([10, 20, 30, 40], :cmyk)
+      c          = ColorLib.new([10, 20, 30, 40], :cmyk)
       assert_kind_of(ColorLib::HSL, c)
       assert_equal(ColorLib::CMYK.new(10, 20, 30, 40).to_hsl, c)
       assert_equal("ColorLib.new has been deprecated. Use ColorLib::CMYK.new instead.", $last_warn)

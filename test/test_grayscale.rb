@@ -1,22 +1,11 @@
-#!/usr/bin/env ruby
-#--
-# ColorLib
-# Colour management with Ruby
-# http://rubyforge.org/projects/color
-#   Version 1.5.0
-#
-# Licensed under a MIT-style licence. See Licence.txt in the main
-# distribution for full licensing information.
-#
-# Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
-#++
-
-$LOAD_PATH.unshift("#{File.dirname(__FILE__)}/../lib") if __FILE__ == $0
-require 'test/unit'
+require 'minitest/autorun'
+require 'test/unit/assertions'
 require 'color_lib'
 
 module TestColorLib
-  class TestGrayScale < Test::Unit::TestCase
+  class TestGrayScale < Minitest::Test
+    include Test::Unit::Assertions
+
     def setup
       @gs = ColorLib::GrayScale.from_percent(33)
     end
@@ -32,11 +21,11 @@ module TestColorLib
     def test_g
       assert_in_delta(0.33, @gs.g, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(33, @gs.grey, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @gs.gray = 40 }
+      @gs.gray = 40
       assert_in_delta(0.4, @gs.g, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @gs.g = 2.0 }
+      @gs.g = 2.0
       assert_in_delta(100, @gs.gray, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @gs.grey = -2.0 }
+      @gs.grey = -2.0
       assert_in_delta(0.0, @gs.g, ColorLib::COLOR_TOLERANCE)
     end
 
@@ -57,7 +46,7 @@ module TestColorLib
 
     def test_to_cmyk
       cmyk = nil
-      assert_nothing_raised { cmyk = @gs.to_cmyk }
+      cmyk = @gs.to_cmyk
       assert_kind_of(ColorLib::CMYK, cmyk)
       assert_in_delta(0.0, cmyk.c, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(0.0, cmyk.m, ColorLib::COLOR_TOLERANCE)
@@ -72,7 +61,7 @@ module TestColorLib
 
     def test_to_hsl
       hsl = nil
-      assert_nothing_raised { hsl = @gs.to_hsl }
+      hsl = @gs.to_hsl
       assert_kind_of(ColorLib::HSL, hsl)
       assert_in_delta(0.0, hsl.h, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(0.0, hsl.s, ColorLib::COLOR_TOLERANCE)
@@ -83,7 +72,7 @@ module TestColorLib
 
     def test_to_rgb
       rgb = nil
-      assert_nothing_raised { rgb = @gs.to_rgb }
+      rgb = @gs.to_rgb
       assert_kind_of(ColorLib::RGB, rgb)
       assert_in_delta(0.33, rgb.r, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(0.33, rgb.g, ColorLib::COLOR_TOLERANCE)
@@ -92,7 +81,7 @@ module TestColorLib
 
     def test_to_yiq
       yiq = nil
-      assert_nothing_raised { yiq = @gs.to_yiq }
+      yiq = @gs.to_yiq
       assert_kind_of(ColorLib::YIQ, yiq)
       assert_in_delta(0.33, yiq.y, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(0.0, yiq.i, ColorLib::COLOR_TOLERANCE)

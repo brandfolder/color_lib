@@ -1,22 +1,11 @@
-#!/usr/bin/env ruby
-#--
-# ColorLib
-# Colour management with Ruby
-# http://rubyforge.org/projects/color
-#   Version 1.5.0
-#
-# Licensed under a MIT-style licence. See Licence.txt in the main
-# distribution for full licensing information.
-#
-# Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
-#++
-
-$LOAD_PATH.unshift("#{File.dirname(__FILE__)}/../lib") if __FILE__ == $0
-require 'test/unit'
+require 'minitest/autorun'
+require 'test/unit/assertions'
 require 'color_lib'
 
 module TestColorLib
-  class TestCMYK < Test::Unit::TestCase
+  class TestCMYK < Minitest::Test
+    include Test::Unit::Assertions
+
     def setup
       @cmyk = ColorLib::CMYK.new(10, 20, 30, 40)
     end
@@ -24,44 +13,44 @@ module TestColorLib
     def test_cyan
       assert_in_delta(0.1, @cmyk.c, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(10, @cmyk.cyan, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @cmyk.cyan = 20 }
+      @cmyk.cyan = 20
       assert_in_delta(0.2, @cmyk.c, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @cmyk.c = 2.0 }
+      @cmyk.c = 2.0
       assert_in_delta(100, @cmyk.cyan, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @cmyk.c = -1.0 }
+      @cmyk.c = -1.0
       assert_in_delta(0.0, @cmyk.c, ColorLib::COLOR_TOLERANCE)
     end
 
     def test_magenta
       assert_in_delta(0.2, @cmyk.m, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(20, @cmyk.magenta, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @cmyk.magenta = 30 }
+      @cmyk.magenta = 30
       assert_in_delta(0.3, @cmyk.m, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @cmyk.m = 2.0 }
+      @cmyk.m = 2.0
       assert_in_delta(100, @cmyk.magenta, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @cmyk.m = -1.0 }
+      @cmyk.m = -1.0
       assert_in_delta(0.0, @cmyk.m, ColorLib::COLOR_TOLERANCE)
     end
 
     def test_yellow
       assert_in_delta(0.3, @cmyk.y, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(30, @cmyk.yellow, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @cmyk.yellow = 20 }
+      @cmyk.yellow = 20
       assert_in_delta(0.2, @cmyk.y, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @cmyk.y = 2.0 }
+      @cmyk.y = 2.0
       assert_in_delta(100, @cmyk.yellow, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @cmyk.y = -1.0 }
+      @cmyk.y = -1.0
       assert_in_delta(0.0, @cmyk.y, ColorLib::COLOR_TOLERANCE)
     end
 
     def test_black
       assert_in_delta(0.4, @cmyk.k, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(40, @cmyk.black, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @cmyk.black = 20 }
+      @cmyk.black = 20
       assert_in_delta(0.2, @cmyk.k, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @cmyk.k = 2.0 }
+      @cmyk.k = 2.0
       assert_in_delta(100, @cmyk.black, ColorLib::COLOR_TOLERANCE)
-      assert_nothing_raised { @cmyk.k = -1.0 }
+      @cmyk.k = -1.0
       assert_in_delta(0.0, @cmyk.k, ColorLib::COLOR_TOLERANCE)
     end
 
@@ -76,7 +65,7 @@ module TestColorLib
 
     def test_to_grayscale
       gs = nil
-      assert_nothing_raised { gs = @cmyk.to_grayscale }
+      gs = @cmyk.to_grayscale
       assert_kind_of(ColorLib::GrayScale, gs)
       assert_in_delta(0.4185, gs.g, ColorLib::COLOR_TOLERANCE)
       assert_kind_of(ColorLib::GreyScale, @cmyk.to_greyscale)
@@ -84,7 +73,7 @@ module TestColorLib
 
     def test_to_hsl
       hsl = nil
-      assert_nothing_raised { hsl = @cmyk.to_hsl }
+      hsl = @cmyk.to_hsl
       assert_kind_of(ColorLib::HSL, hsl)
       assert_in_delta(0.48, hsl.l, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(0.125, hsl.s, ColorLib::COLOR_TOLERANCE)
@@ -95,13 +84,13 @@ module TestColorLib
 
     def test_to_rgb
       rgb = nil
-      assert_nothing_raised { rgb = @cmyk.to_rgb(true) }
+      rgb = @cmyk.to_rgb(true)
       assert_kind_of(ColorLib::RGB, rgb)
       assert_in_delta(0.5, rgb.r, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(0.4, rgb.g, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(0.3, rgb.b, ColorLib::COLOR_TOLERANCE)
 
-      assert_nothing_raised { rgb = @cmyk.to_rgb }
+      rgb = @cmyk.to_rgb
       assert_kind_of(ColorLib::RGB, rgb)
       assert_in_delta(0.54, rgb.r, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(0.48, rgb.g, ColorLib::COLOR_TOLERANCE)
@@ -118,7 +107,7 @@ module TestColorLib
 
     def test_to_yiq
       yiq = nil
-      assert_nothing_raised { yiq = @cmyk.to_yiq }
+      yiq = @cmyk.to_yiq
       assert_kind_of(ColorLib::YIQ, yiq)
       assert_in_delta(0.4911, yiq.y, ColorLib::COLOR_TOLERANCE)
       assert_in_delta(0.05502, yiq.i, ColorLib::COLOR_TOLERANCE)

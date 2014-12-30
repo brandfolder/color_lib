@@ -1,22 +1,10 @@
-#--
-# ColorLib
-# Colour management with Ruby
-# http://rubyforge.org/projects/color
-#
-#
-# Licensed under a MIT-style licence. See Licence.txt in the main
-# distribution for full licensing information.
-#
-# Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
-#++
-
 # A colour object representing YIQ (NTSC) colour encoding.
 class ColorLib::YIQ
   # Creates a YIQ colour object from fractional values 0 .. 1.
   #
   #   ColorLib::YIQ.new(0.3, 0.2, 0.1)
   def self.from_fraction(y = 0, i = 0, q = 0)
-    color = ColorLib::YIQ.new
+    color   = ColorLib::YIQ.new
     color.y = y
     color.i = i
     color.q = q
@@ -42,9 +30,9 @@ class ColorLib::YIQ
   def ==(other)
     other = other.to_yiq
     other.kind_of?(ColorLib::YIQ) and
-    ((@y - other.y).abs <= ColorLib::COLOR_TOLERANCE) and
-    ((@i - other.i).abs <= ColorLib::COLOR_TOLERANCE) and
-    ((@q - other.q).abs <= ColorLib::COLOR_TOLERANCE) 
+      ((@y - other.y).abs <= ColorLib::COLOR_TOLERANCE) and
+      ((@i - other.i).abs <= ColorLib::COLOR_TOLERANCE) and
+      ((@q - other.q).abs <= ColorLib::COLOR_TOLERANCE)
   end
 
   def to_yiq
@@ -54,31 +42,38 @@ class ColorLib::YIQ
   def brightness
     @y
   end
+
   def to_grayscale
     ColorLib::GrayScale.new(@y)
   end
+
   alias to_greyscale to_grayscale
 
   def y
     @y
   end
+
   def y=(yy)
     @y = ColorLib.normalize(yy)
   end
+
   def i
     @i
   end
+
   def i=(ii)
     @i = ColorLib.normalize(ii)
   end
+
   def q
     @q
   end
+
   def q=(qq)
     @q = ColorLib.normalize(qq)
   end
 
   def inspect
-    "YIQ [%.2f%%, %.2f%%, %.2f%%]" % [ @y * 100, @i * 100, @q * 100 ]
+    "YIQ [%.2f%%, %.2f%%, %.2f%%]" % [@y * 100, @i * 100, @q * 100]
   end
 end

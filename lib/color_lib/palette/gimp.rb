@@ -1,17 +1,4 @@
-#--
-# ColorLib
-# Colour management with Ruby
-# http://rubyforge.org/projects/color
-#
-#
-# Licensed under a MIT-style licence. See Licence.txt in the main
-# distribution for full licensing information.
-#
-# Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
-#++
-
 require 'color_lib/palette'
-
 # A class that can read a GIMP (GNU Image Manipulation Program) palette file
 # and provide a Hash-like interface to the contents. GIMP colour palettes
 # are RGB values only.
@@ -42,10 +29,10 @@ class ColorLib::Palette::Gimp
 
   # Create a new GIMP palette from the palette file as a string.
   def initialize(palette)
-    @colors   = []
-    @names    = {}
-    @valid    = false
-    @name     = "(unnamed)"
+    @colors = []
+    @names  = {}
+    @valid  = false
+    @name   = "(unnamed)"
 
     palette.split($/).each do |line|
       line.chomp!
@@ -73,7 +60,7 @@ class ColorLib::Palette::Gimp
 
       @colors << color
       @names[name] ||= []
-      @names[name]  << color
+      @names[name] << color
     end
   end
 

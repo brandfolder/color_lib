@@ -1,8 +1,6 @@
 # ColorLib
 
-A lib for colors.
-
-## Installation
+A lib for colors.## Installation
 
 Add this line to your application's Gemfile:
 
@@ -16,9 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install color_lib
-
-## Contributing
+    $ gem install color_lib## Contributing
 
 1. Fork it ( https://github.com/brandfolder/color_lib/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)

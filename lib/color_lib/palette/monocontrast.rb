@@ -1,17 +1,4 @@
-#--
-# ColorLib
-# Colour management with Ruby
-# http://rubyforge.org/projects/color
-#
-#
-# Licensed under a MIT-style licence. See Licence.txt in the main
-# distribution for full licensing information.
-#
-# Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
-#++
-
 require 'color_lib/palette'
-
 # Generates a monochromatic constrasting colour palette for background and
 # foreground. What does this mean?
 #
@@ -49,7 +36,8 @@ class ColorLib::Palette::MonoContrast
   # / 255.0. If this value is set to +nil+, it will be restored to the
   # default.
   attr_accessor :minimum_brightness_diff
-  remove_method :minimum_brightness_diff= ;
+  remove_method :minimum_brightness_diff=;
+
   def minimum_brightness_diff=(bd) #:nodoc:
     if bd.nil?
       @minimum_brightness_diff = DEFAULT_MINIMUM_BRIGHTNESS_DIFF
@@ -60,7 +48,7 @@ class ColorLib::Palette::MonoContrast
     else
       @minimum_brightness_diff = bd
     end
-      
+
     regenerate(@background[0], @foreground[0])
   end
 
@@ -70,7 +58,8 @@ class ColorLib::Palette::MonoContrast
   # and must be between 0..3. Setting this value will regenerate the palette
   # based on the base colours. The default value for this is 500 / 255.0.
   attr_accessor :minimum_color_diff
-  remove_method :minimum_color_diff= ;
+  remove_method :minimum_color_diff=;
+
   def minimum_color_diff=(cd) #:noco:
     if cd.nil?
       @minimum_color_diff = DEFAULT_MINIMUM_COLOR_DIFF
@@ -87,7 +76,7 @@ class ColorLib::Palette::MonoContrast
   # Generate the initial palette.
   def initialize(background, foreground = nil)
     @minimum_brightness_diff = DEFAULT_MINIMUM_BRIGHTNESS_DIFF
-    @minimum_color_diff = DEFAULT_MINIMUM_COLOR_DIFF
+    @minimum_color_diff      = DEFAULT_MINIMUM_COLOR_DIFF
 
     regenerate(background, foreground)
   end
@@ -106,7 +95,7 @@ class ColorLib::Palette::MonoContrast
     @background[-3] = background.darken_by(50)
     @background[-2] = background.darken_by(75)
     @background[-1] = background.darken_by(85)
-    @background[ 0] = background
+    @background[0]  = background
     @background[+1] = background.lighten_by(85)
     @background[+2] = background.lighten_by(75)
     @background[+3] = background.lighten_by(50)
@@ -118,7 +107,7 @@ class ColorLib::Palette::MonoContrast
     @foreground[-3] = calculate_foreground(@background[-3], foreground)
     @foreground[-2] = calculate_foreground(@background[-2], foreground)
     @foreground[-1] = calculate_foreground(@background[-1], foreground)
-    @foreground[ 0] = calculate_foreground(@background[ 0], foreground)
+    @foreground[0]  = calculate_foreground(@background[0], foreground)
     @foreground[+1] = calculate_foreground(@background[+1], foreground)
     @foreground[+2] = calculate_foreground(@background[+2], foreground)
     @foreground[+3] = calculate_foreground(@background[+3], foreground)

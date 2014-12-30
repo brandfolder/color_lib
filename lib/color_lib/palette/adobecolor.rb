@@ -1,17 +1,4 @@
-#--
-# ColorLib
-# Colour management with Ruby
-# http://rubyforge.org/projects/color
-#
-#
-# Licensed under a MIT-style licence. See Licence.txt in the main
-# distribution for full licensing information.
-#
-# Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
-#++
-
 require 'color_lib/palette'
-
 # A class that can read an Adobe ColorLib palette file (used for Photoshop
 # swatches) and provide a Hash-like interface to the contents. Not all
 # colour formats in ACO files are supported. Based largely off the
@@ -69,7 +56,7 @@ class ColorLib::Palette::AdobeColorLib
         raise IndexError if @offset >= self.size
         val = self[@offset, count * 2]
         raise IndexError if val.nil? or val.size < (count * 2)
-        val = val.unpack("n" * count)
+        val     = val.unpack("n" * count)
         @offset += count * 2
         val
       end
@@ -90,12 +77,12 @@ class ColorLib::Palette::AdobeColorLib
 
     count.times do
       space, w, x, y, z = palette.readwords 5
-      name = nil
+      name              = nil
       if @version == 2
-        raise IndexError unless palette.readwords == [ 0 ]
-        len = palette.readwords
+        raise IndexError unless palette.readwords == [0]
+        len  = palette.readwords
         name = palette.readutf16(len[0] - 1)
-        raise IndexError unless palette.readwords == [ 0 ]
+        raise IndexError unless palette.readwords == [0]
       end
 
       color = case space
@@ -129,21 +116,27 @@ class ColorLib::Palette::AdobeColorLib
                     v3 = v.to_f * (1 - s.to_f * (1 - (vh - vi)))
 
                     case vi
-                    when 0 then ColorLib::RGB.from_fraction(v, v3, v1)
-                    when 1 then ColorLib::RGB.from_fraction(v2, v, v1)
-                    when 2 then ColorLib::RGB.from_fraction(v1, v, v3)
-                    when 3 then ColorLib::RGB.from_fraction(v1, v2, v)
-                    when 4 then ColorLib::RGB.from_fraction(v3, v1, v)
-                    else ColorLib::RGB.from_fraction(v, v1, v2)
+                    when 0 then
+                      ColorLib::RGB.from_fraction(v, v3, v1)
+                    when 1 then
+                      ColorLib::RGB.from_fraction(v2, v, v1)
+                    when 2 then
+                      ColorLib::RGB.from_fraction(v1, v, v3)
+                    when 3 then
+                      ColorLib::RGB.from_fraction(v1, v2, v)
+                    when 4 then
+                      ColorLib::RGB.from_fraction(v3, v1, v)
+                    else
+                      ColorLib::RGB.from_fraction(v, v1, v2)
                     end
                   end
                 end
               when 2 then # CMYK
                 @statistics[:cmyk] += 1
                 ColorLib::CMYK.from_percent(100 - (w / 655.35),
-                                         100 - (x / 655.35),
-                                         100 - (y / 655.35),
-                                         100 - (z / 655.35))
+                                            100 - (x / 655.35),
+                                            100 - (y / 655.35),
+                                            100 - (z / 655.35))
               when 7 then # L*a*b*
                 @statistics[:lab] += 1
 
@@ -154,7 +147,7 @@ class ColorLib::Palette::AdobeColorLib
                 if defined? ColorLib::Lab
                   ColorLib::Lab.new(l, a, b)
                 else
-                  [ space, w, x, y, z ]
+                  [space, w, x, y, z]
                 end
               when 8 then # Grayscale
                 @statistics[:gray] += 1
@@ -171,10 +164,10 @@ class ColorLib::Palette::AdobeColorLib
                 ColorLib::CMYK.from_percent(c, m, y, k)
               else
                 @statistics[space] += 1
-                [ space, w, x, y, z ]
+                [space, w, x, y, z]
               end
 
-      @order << [ color, name ]
+      @order << [color, name]
 
       if color.kind_of? Array
         @lost << color
@@ -224,7 +217,7 @@ class ColorLib::Palette::AdobeColorLib
   def to_aco(version = @version) #:nodoc:
     res = ""
 
-    res << [ version, @order.size ].pack("nn")
+    res << [version, @order.size].pack("nn")
 
     @order.each do |cnpair|
       color, name = *cnpair
@@ -232,35 +225,35 @@ class ColorLib::Palette::AdobeColorLib
       # Note: HSB and CMYK formats are lost by the conversions performed on
       # import. They are turned into RGB and WCMYK, respectively.
 
-      cstr = case color
-             when Array
-               color
-             when ColorLib::RGB
-               r = [(color.red * 256).round, 65535].min
-               g = [(color.green * 256).round, 65535].min
-               b = [(color.blue * 256).round, 65535].min
-               [ 0, r, g, b, 0 ]
-             when ColorLib::GrayScale
-               g = [(color.gray * 100).round, 10000].min
-               [ 8, g, 0, 0, 0 ]
-             when ColorLib::CMYK
-               c = [(color.cyan * 100).round, 10000].min
-               m = [(color.magenta * 100).round, 10000].min
-               y = [(color.yellow * 100).round, 10000].min
-               k = [(color.black * 100).round, 10000].min
-               [ 9, c, m, y, k ]
-             end
-      cstr = cstr.pack("nnnnn")
+      cstr        = case color
+                    when Array
+                      color
+                    when ColorLib::RGB
+                      r = [(color.red * 256).round, 65535].min
+                      g = [(color.green * 256).round, 65535].min
+                      b = [(color.blue * 256).round, 65535].min
+                      [0, r, g, b, 0]
+                    when ColorLib::GrayScale
+                      g = [(color.gray * 100).round, 10000].min
+                      [8, g, 0, 0, 0]
+                    when ColorLib::CMYK
+                      c = [(color.cyan * 100).round, 10000].min
+                      m = [(color.magenta * 100).round, 10000].min
+                      y = [(color.yellow * 100).round, 10000].min
+                      k = [(color.black * 100).round, 10000].min
+                      [9, c, m, y, k]
+                    end
+      cstr        = cstr.pack("nnnnn")
 
       nstr = ""
 
       if version == 2
         if (name.size / 2 * 2) == name.size # only where s[0] == byte!
-          nstr << [ 0, (name.size / 2) + 1 ].pack("nn")
+          nstr << [0, (name.size / 2) + 1].pack("nn")
           nstr << name
-          nstr << [ 0 ].pack("n")
+          nstr << [0].pack("n")
         else
-          nstr << [ 0, 1, 0 ].pack("nnn")
+          nstr << [0, 1, 0].pack("nnn")
         end
       end
 

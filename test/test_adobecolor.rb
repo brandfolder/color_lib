@@ -1,24 +1,12 @@
-#!/usr/bin/env ruby
-#--
-# ColorLib
-# Colour management with Ruby
-# http://rubyforge.org/projects/color
-#   Version 1.5.0
-#
-# Licensed under a MIT-style licence. See Licence.txt in the main
-# distribution for full licensing information.
-#
-# Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
-#++
-
-$LOAD_PATH.unshift("#{File.dirname(__FILE__)}/../lib") if __FILE__ == $0
-require 'test/unit'
+require "minitest/autorun"
+require 'test/unit/assertions'
 require 'color_lib'
 require 'color_lib/palette/adobecolor'
 
 module TestColorLib
   module TestPalette
-    class TestAdobeColorLib < Test::Unit::TestCase
+    class TestAdobeColorLib < Minitest::Test
+      include Test::Unit::Assertions
       include ColorLib::Palette
 
       # This is based on the Visibone Anglo-Centric ColorLib Code List; this is
@@ -315,14 +303,13 @@ QgAAAAIMzH//GZn//wAAAAUAQwBNAFkASwAAAAcbWOiQG1gAAAAAAAQATABB
 AEIAAAAIFXwAAAAAAAAAAAAFAEcAcgBhAHkAAAAJCcQNrBGUBdwAAAAGAFcA
 QwBNAFkASwAAAA0JxA2sEZQF3AAAAAsAVQBOAEsATgBPAFcATgAgADEAMwAA
       EOS
-
-# http://www.visibone.com/swatches/VisiBone.aco
-# http://www.visibone.com/swatches/VisiBone2.aco
-# http://www.visibone.com/swatches/VisiBone2_km.psppalette
-# http://www.visibone.com/swatches/VisiBone2_km.pal
-# http://www.visibone.com/swatches/VisiBone2_vaccc.ai
-# http://www.visibone.com/swatches/VisiBone.gimp
-# http://www.visibone.com/swatches/VisiBone.act
+      # http://www.visibone.com/swatches/VisiBone.aco
+      # http://www.visibone.com/swatches/VisiBone2.aco
+      # http://www.visibone.com/swatches/VisiBone2_km.psppalette
+      # http://www.visibone.com/swatches/VisiBone2_km.pal
+      # http://www.visibone.com/swatches/VisiBone2_vaccc.ai
+      # http://www.visibone.com/swatches/VisiBone.gimp
+      # http://www.visibone.com/swatches/VisiBone.act
 
       def setup
         @filename = "test#{Process.pid}.aco"
@@ -334,22 +321,22 @@ QwBNAFkASwAAAA0JxA2sEZQF3AAAAAsAVQBOAEsATgBPAFcATgAgADEAMwAA
       end
 
       def test_version1
-        v1 = VISIBONE_V1.unpack("m*")[0]
-        assert_nothing_raised { @aco = AdobeColorLib.new(v1) }
+        v1   = VISIBONE_V1.unpack("m*")[0]
+        @aco = AdobeColorLib.new(v1)
         assert_equal(216, @aco.size)
         assert_equal(1, @aco.version)
-        assert_equal({:rgb => 216}, @aco.statistics)
+        assert_equal({ :rgb => 216 }, @aco.statistics)
         assert_equal(ColorLib::RGB::White, @aco[0])
         assert_equal("#ff0033", @aco[-1].html)
         assert_equal(v1, @aco.to_aco)
       end
 
       def test_version2
-        v2 = VISIBONE_V2.unpack("m*")[0]
+        v2   = VISIBONE_V2.unpack("m*")[0]
         @aco = AdobeColorLib.new(v2)
         assert_equal(216, @aco.size)
         assert_equal(2, @aco.version)
-        assert_equal({:rgb => 216}, @aco.statistics)
+        assert_equal({ :rgb => 216 }, @aco.statistics)
         assert_equal(ColorLib::RGB::White, @aco[0])
         assert_equal(ColorLib::RGB::White,
                      @aco["\000W\000h\000i\000t\000e"][0])
@@ -360,43 +347,41 @@ QwBNAFkASwAAAA0JxA2sEZQF3AAAAAsAVQBOAEsATgBPAFcATgAgADEAMwAA
       end
 
       def test_bogus
-        o = VISIBONE_V2.unpack("m*")[0]
-        v = o.dup
-        v[0, 2] = [ 322 ].pack("n") # break the version
+        o       = VISIBONE_V2.unpack("m*")[0]
+        v       = o.dup
+        v[0, 2] = [322].pack("n") # break the version
         assert_raises(RuntimeError) { AdobeColorLib.new(v) }
-        v = o.dup
-        v[2, 2] = [ 217 ].pack("n") # break the colour count
+        v       = o.dup
+        v[2, 2] = [217].pack("n") # break the colour count
         assert_raises(IndexError) { @aco = AdobeColorLib.new(v) }
-        v = o.dup
-        v[14, 2] = [ 99 ].pack("n") # break the NULL before the name
+        v        = o.dup
+        v[14, 2] = [99].pack("n") # break the NULL before the name
         assert_raises(IndexError) { @aco = AdobeColorLib.new(v) }
-        v = o.dup
-        v[16, 2] = [ 18 ].pack("n") # break the length of the name
+        v        = o.dup
+        v[16, 2] = [18].pack("n") # break the length of the name
         assert_raises(IndexError) { @aco = AdobeColorLib.new(v) }
-        v = o.dup
-        v[28, 2] = [ 99 ].pack("n") # break the trailing null of the name
+        v        = o.dup
+        v[28, 2] = [99].pack("n") # break the trailing null of the name
       end
 
       def test_exercise
-        assert_nothing_raised do
-          File.open(@filename, "wb") do |f|
-            f.write EXERCISE.unpack("m*")[0]
-          end
+        File.open(@filename, "wb") do |f|
+          f.write EXERCISE.unpack("m*")[0]
         end
-        assert_nothing_raised { @aco = AdobeColorLib.from_file(@filename) }
+        @aco = AdobeColorLib.from_file(@filename)
         assert_equal(5, @aco.size)
         assert_equal(7, @aco.instance_variable_get(:@order).size)
       end
 
       def test_each
-        v1 = VISIBONE_V1.unpack("m*")[0]
+        v1   = VISIBONE_V1.unpack("m*")[0]
         @aco = AdobeColorLib.new(v1)
         @aco.each { |c| assert_kind_of(ColorLib::RGB, c) }
       end
 
       def test_each_name
-        v2 = VISIBONE_V2.unpack("m*")[0]
-        assert_nothing_raised { @aco = AdobeColorLib.new(v2) }
+        v2   = VISIBONE_V2.unpack("m*")[0]
+        @aco = AdobeColorLib.new(v2)
         assert_equal(216, @aco.size)
         assert_equal(2, @aco.version)
         @aco.each_name do |n, s|
@@ -407,8 +392,8 @@ QwBNAFkASwAAAA0JxA2sEZQF3AAAAAsAVQBOAEsATgBPAFcATgAgADEAMwAA
       end
 
       def test_values_at
-        v2 = VISIBONE_V2.unpack("m*")[0]
-        assert_nothing_raised { @aco = AdobeColorLib.new(v2) }
+        v2   = VISIBONE_V2.unpack("m*")[0]
+        @aco = AdobeColorLib.new(v2)
         assert_equal(216, @aco.size)
         assert_equal(2, @aco.version)
         assert_equal([ColorLib::RGB::White, ColorLib::RGB.from_html("#ff0033")],

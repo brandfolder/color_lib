@@ -1,28 +1,16 @@
-#--
-# ColorLib
-# Colour management with Ruby
-# http://rubyforge.org/projects/color
-#
-#
-# Licensed under a MIT-style licence. See Licence.txt in the main
-# distribution for full licensing information.
-#
-# Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
-#++
-
 # A colour object representing shades of grey. Used primarily in PDF
 # document creation.
 class ColorLib::GrayScale
   # The format of a DeviceGrey colour for PDF. In color-tools 2.0 this will
   # be removed from this package and added back as a modification by the
   # PDF::Writer package.
-  PDF_FORMAT_STR  = "%.3f %s"
+  PDF_FORMAT_STR = "%.3f %s"
 
   # Creates a greyscale colour object from fractional values 0..1.
   #
   #   ColorLib::GreyScale.from_fraction(0.5)
   def self.from_fraction(g = 0)
-    color = ColorLib::GrayScale.new
+    color   = ColorLib::GrayScale.new
     color.g = g
     color
   end
@@ -51,24 +39,25 @@ class ColorLib::GrayScale
   def ==(other)
     other = other.to_grayscale
     other.kind_of?(ColorLib::GrayScale) and
-    ((@g - other.g).abs <= ColorLib::COLOR_TOLERANCE)
+      ((@g - other.g).abs <= ColorLib::COLOR_TOLERANCE)
   end
 
   # Present the colour as a DeviceGrey fill colour string for PDF. This will
   # be removed from the default package in color-tools 2.0.
   def pdf_fill
-    PDF_FORMAT_STR % [ @g, "g" ]
+    PDF_FORMAT_STR % [@g, "g"]
   end
 
   # Present the colour as a DeviceGrey stroke colour string for PDF. This
   # will be removed from the default package in color-tools 2.0.
   def pdf_stroke
-    PDF_FORMAT_STR % [ @g, "G" ]
+    PDF_FORMAT_STR % [@g, "G"]
   end
 
   def to_255
     [(@g * 255).round, 255].min
   end
+
   private :to_255
 
   # Present the colour as an HTML/CSS colour string.
@@ -80,13 +69,13 @@ class ColorLib::GrayScale
   # Present the colour as an RGB HTML/CSS colour string (e.g., "rgb(0%, 50%,
   # 100%)").
   def css_rgb
-    "rgb(%3.2f%%, %3.2f%%, %3.2f%%)" % [ gray, gray, gray ]
+    "rgb(%3.2f%%, %3.2f%%, %3.2f%%)" % [gray, gray, gray]
   end
 
   # Present the colour as an RGBA (with alpha) HTML/CSS colour string (e.g.,
   # "rgb(0%, 50%, 100%, 1)").
   def css_rgba
-    "rgba(%3.2f%%, %3.2f%%, %3.2f%%, %1.2f)" % [ gray, gray, gray, 1 ]
+    "rgba(%3.2f%%, %3.2f%%, %3.2f%%, %1.2f)" % [gray, gray, gray, 1]
   end
 
   # Present the colour as an HSL HTML/CSS colour string (e.g., "hsl(180,
@@ -117,6 +106,7 @@ class ColorLib::GrayScale
   def to_grayscale
     self
   end
+
   alias to_greyscale to_grayscale
 
   # Lightens the greyscale colour by the stated percent.
@@ -138,7 +128,7 @@ class ColorLib::GrayScale
   def to_yiq
     y = @g
     i = (@g * 0.596) + (@g * -0.275) + (@g * -0.321)
-    q = (@g * 0.212) + (@g * -0.523) + (@g *  0.311)
+    q = (@g * 0.212) + (@g * -0.523) + (@g * 0.311)
     ColorLib::YIQ.from_fraction(y, i, q)
   end
 
@@ -158,17 +148,20 @@ class ColorLib::GrayScale
   def gray
     @g * 100.0
   end
+
   alias grey gray
   # Returns the grayscale value as a fractional value of white in the range
   # 0.0 .. 1.0.
   def g
     @g
   end
+
   # Sets the grayscale value as a percentage of white.
   def gray=(gg)
     @g = ColorLib.normalize(gg / 100.0)
   end
-  alias grey= gray= ;
+
+  alias grey= gray=;
   # Returns the grayscale value as a fractional value of white in the range
   # 0.0 .. 1.0.
   def g=(gg)
@@ -183,8 +176,8 @@ class ColorLib::GrayScale
   # valid colour in the result.
   def +(other)
     other = other.to_grayscale
-    ng = self.dup
-    ng.g += other.g
+    ng    = self.dup
+    ng.g  += other.g
     ng
   end
 
@@ -195,14 +188,14 @@ class ColorLib::GrayScale
   # The subtraction is done using the grayscale accessor methods to ensure a
   # valid colour in the result.
   def -(other)
-    other = other.to_grayscale 
-    ng = self.dup
-    ng.g -= other.g
+    other = other.to_grayscale
+    ng    = self.dup
+    ng.g  -= other.g
     ng
   end
 
   def inspect
-    "Gray [%.2f%%]" % [ gray ]
+    "Gray [%.2f%%]" % [gray]
   end
 end
 

@@ -1,15 +1,3 @@
-#--
-# ColorLib
-# Colour management with Ruby
-# http://rubyforge.org/projects/color
-#
-#
-# Licensed under a MIT-style licence. See Licence.txt in the main
-# distribution for full licensing information.
-#
-# Copyright (c) 2005 - 2010 Austin Ziegler and Matt Lyon
-#++
-
 # An HSL colour object. Internally, the hue (#h), saturation (#s), and
 # luminosity/lightness (#l) values are dealt with as fractional values in
 # the range 0..1.
@@ -17,7 +5,7 @@ class ColorLib::HSL
   class << self
     # Creates an HSL colour object from fractional values 0..1.
     def from_fraction(h = 0.0, s = 0.0, l = 0.0)
-      colour = ColorLib::HSL.new
+      colour   = ColorLib::HSL.new
       colour.h = h
       colour.s = s
       colour.l = l
@@ -35,9 +23,9 @@ class ColorLib::HSL
   def ==(other)
     other = other.to_hsl
     other.kind_of?(ColorLib::HSL) and
-    ((@h - other.h).abs <= ColorLib::COLOR_TOLERANCE) and
-    ((@s - other.s).abs <= ColorLib::COLOR_TOLERANCE) and
-    ((@l - other.l).abs <= ColorLib::COLOR_TOLERANCE)
+      ((@h - other.h).abs <= ColorLib::COLOR_TOLERANCE) and
+      ((@s - other.s).abs <= ColorLib::COLOR_TOLERANCE) and
+      ((@l - other.l).abs <= ColorLib::COLOR_TOLERANCE)
   end
 
   # Creates an HSL colour object from the standard values of degrees and
@@ -70,13 +58,13 @@ class ColorLib::HSL
   # Present the colour as an HSL HTML/CSS colour string (e.g., "hsl(180,
   # 25%, 35%)").
   def css_hsl
-    "hsl(%3.2f, %3.2f%%, %3.2f%%)" % [ hue, saturation, luminosity ]
+    "hsl(%3.2f, %3.2f%%, %3.2f%%)" % [hue, saturation, luminosity]
   end
 
   # Present the colour as an HSLA (with alpha) HTML/CSS colour string (e.g.,
   # "hsla(180, 25%, 35%, 1)").
   def css_hsla
-    "hsla(%3.2f, %3.2f%%, %3.2f%%, %3.2f)" % [ hue, saturation, luminosity, 1 ]
+    "hsla(%3.2f, %3.2f%%, %3.2f%%, %3.2f)" % [hue, saturation, luminosity, 1]
   end
 
   # Converting to HSL as adapted from Foley and Van-Dam from
@@ -101,7 +89,7 @@ class ColorLib::HSL
     end
     tmp1 = 2.0 * @l - tmp2
 
-    tmp3  = [ @h + (1.0 / 3.0), @h, @h - (1.0 / 3.0) ]
+    tmp3 = [@h + (1.0 / 3.0), @h, @h - (1.0 / 3.0)]
 
     rgb = tmp3.map { |hue|
       hue += 1.0 if ColorLib.near_zero_or_less?(hue)
@@ -118,7 +106,7 @@ class ColorLib::HSL
       end
     }
 
-     ColorLib::RGB.from_fraction(*rgb)
+    ColorLib::RGB.from_fraction(*rgb)
   end
 
   # Converts to RGB then YIQ.
@@ -135,19 +123,23 @@ class ColorLib::HSL
   def brightness
     @l
   end
+
   def to_greyscale
     ColorLib::GrayScale.from_fraction(@l)
   end
+
   alias to_grayscale to_greyscale
 
   # Returns the hue of the colour in degrees.
   def hue
     @h * 360.0
   end
+
   # Returns the hue of the colour in the range 0.0 .. 1.0.
   def h
     @h
   end
+
   # Sets the hue of the colour in degrees. Colour is perceived as a wheel,
   # so values should be set properly even with negative degree values.
   def hue=(hh)
@@ -158,22 +150,27 @@ class ColorLib::HSL
 
     @h = ColorLib.normalize(hh)
   end
+
   # Sets the hue of the colour in the range 0.0 .. 1.0.
   def h=(hh)
     @h = ColorLib.normalize(hh)
   end
+
   # Returns the percentage of saturation of the colour.
   def saturation
     @s * 100.0
   end
+
   # Returns the saturation of the colour in the range 0.0 .. 1.0.
   def s
     @s
   end
+
   # Sets the percentage of saturation of the colour.
   def saturation=(ss)
     @s = ColorLib.normalize(ss / 100.0)
   end
+
   # Sets the saturation of the colour in the ragne 0.0 .. 1.0.
   def s=(ss)
     @s = ColorLib.normalize(ss)
@@ -183,16 +180,19 @@ class ColorLib::HSL
   def luminosity
     @l * 100.0
   end
+
   alias lightness luminosity
   # Returns the luminosity of the colour in the range 0.0 .. 1.0.
   def l
     @l
   end
+
   # Sets the percentage of luminosity of the colour.
   def luminosity=(ll)
     @l = ColorLib.normalize(ll / 100.0)
   end
-  alias lightness= luminosity= ;
+
+  alias lightness= luminosity=;
   # Sets the luminosity of the colour in the ragne 0.0 .. 1.0.
   def l=(ll)
     @l = ColorLib.normalize(ll)
@@ -203,7 +203,7 @@ class ColorLib::HSL
   end
 
   def inspect
-    "HSL [%.2f deg, %.2f%%, %.2f%%]" % [ hue, saturation, luminosity ]
+    "HSL [%.2f deg, %.2f%%, %.2f%%]" % [hue, saturation, luminosity]
   end
 
   # Mix the mask colour (which will be converted to an HSL colour) with the
@@ -211,10 +211,10 @@ class ColorLib::HSL
   #
   # NOTE::  This differs from ColorLib::RGB#mix_with.
   def mix_with(color, mix_percent = 0.5)
-    color   = color.to_hsl
-    _h = ((color.h - self.h) * mix_percent) + self.h
-    _s = ((color.s - self.s) * mix_percent) + self.s
-    _l = ((color.l - self.l) * mix_percent) + self.l
+    color = color.to_hsl
+    _h    = ((color.h - self.h) * mix_percent) + self.h
+    _s    = ((color.s - self.s) * mix_percent) + self.s
+    _l    = ((color.l - self.l) * mix_percent) + self.l
 
     self.class.from_fraction(_h, _s, _l)
   end
