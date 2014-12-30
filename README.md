@@ -1,5 +1,4 @@
-# ColorLib
-[![Build Status](https://travis-ci.org/brandfolder/color_lib.svg?branch=master)](https://travis-ci.org/brandfolder/color_lib)
+# ColorLib [![Build Status](https://travis-ci.org/brandfolder/color_lib.svg?branch=master)](https://travis-ci.org/brandfolder/color_lib)
 
 A lib for colors.## Installation
 
