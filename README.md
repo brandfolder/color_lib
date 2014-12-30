@@ -1,4 +1,5 @@
 # ColorLib
+https://travis-ci.org/brandfolder/color_lib.svg?branch=master
 
 A lib for colors.## Installation
 
