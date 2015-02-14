@@ -34,17 +34,21 @@ class ColorLib::RGB
     #   ColorLib::RGB.from_html("#cabbed")
     #   ColorLib::RGB.from_html("cabbed")
     def from_html(html_colour)
-      html_colour = html_colour.gsub(%r{[#;]}, '')
-      case html_colour.size
-      when 3
-        colours = html_colour.scan(%r{[0-9A-Fa-f]}).map { |el| (el * 2).to_i(16) }
-      when 6
-        colours = html_colour.scan(%r<[0-9A-Fa-f]{2}>).map { |el| el.to_i(16) }
-      else
-        raise ArgumentError
-      end
+      if from_html.present?
+        html_colour = html_colour.gsub(%r{[#;]}, '')
+        case html_colour.size
+        when 3
+          colours = html_colour.scan(%r{[0-9A-Fa-f]}).map { |el| (el * 2).to_i(16) }
+        when 6
+          colours = html_colour.scan(%r<[0-9A-Fa-f]{2}>).map { |el| el.to_i(16) }
+        else
+          raise ArgumentError
+        end
 
-      ColorLib::RGB.new(*colours)
+        ColorLib::RGB.new(*colours)
+      else
+        nil
+      end
     end
   end
 
