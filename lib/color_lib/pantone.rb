@@ -1555,7 +1555,29 @@ class ColorLib::Pantone
     :'warmred' => 'F9423A',
     :'yellow012' => 'FFD700',
     :'yellow0131' => 'F2F0A1',
-    :'yellow' => 'FEDD00'
+    :'yellow' => 'FEDD00',
+    :'coolgrey1' => 'D9D9D6',
+    :'coolgrey10' => '63666A',
+    :'coolgrey11' => '53565A',
+    :'coolgrey2' => 'D0D0CE',
+    :'coolgrey3' => 'C8C9C7',
+    :'coolgrey4' => 'BBBCBC',
+    :'coolgrey5' => 'B1B3B3',
+    :'coolgrey6' => 'A7A8AA',
+    :'coolgrey7' => '97999B',
+    :'coolgrey8' => '888B8D',
+    :'coolgrey9' => '75787B',
+    :'warmgrey1' => 'D7D2CB',
+    :'warmgrey10' => '796E65',
+    :'warmgrey11' => '6E6259',
+    :'warmgrey2' => 'CBC4BC',
+    :'warmgrey3' => 'BFB8AF',
+    :'warmgrey4' => 'B6ADA5',
+    :'warmgrey5' => 'ACA39A',
+    :'warmgrey6' => 'A59C94',
+    :'warmgrey7' => '968C83',
+    :'warmgrey8' => '8C8279',
+    :'warmgrey9' => '83786F'    
   }
 
 end
