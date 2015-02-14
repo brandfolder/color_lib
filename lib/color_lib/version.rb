@@ -1,3 +1,3 @@
 module ColorLib
-  VERSION = "1.4.6"
+  VERSION = "1.4.5"
 end

@@ -6,8 +6,16 @@ class ColorLib::Pantone
   end
 
   def self.match(value)
-    match_value = value.to_s.gsub(/[c\ \-]/i, '').downcase
-    VALUES[VALUES.keys.find { |key| /^#{match_value}$/ === key }]
+    if value.strip[-2..-1] =~ /\ c/i
+        # remove coated version (" C") from end of string
+        value = value.strip.downcase.chomp(" c")
+    elsif value.strip[-2..-1] =~ /\dc/i
+        # remove coated version ("C") from end of numerical pantones ("101C")
+        value = value.strip.downcase.chomp("c")
+    end
+    # remove spaces & downcase for clean match
+    value = value.to_s.gsub(/[\ \-]/i, '').downcase
+    VALUES[VALUES.keys.find { |key| /^#{value}$/ === key }]
   end
 
   VALUES = {
@@ -1511,8 +1519,6 @@ class ColorLib::Pantone
     :'brightorange' => 'FF5E00',
     :'brightred' => 'F93822',
     :'coolgray1' => 'D9D9D6',
-    :'coolgray10' => '63666A',
-    :'coolgray11' => '53565A',
     :'coolgray2' => 'D0D0CE',
     :'coolgray3' => 'C8C9C7',
     :'coolgray4' => 'BBBCBC',
@@ -1521,6 +1527,8 @@ class ColorLib::Pantone
     :'coolgray7' => '97999B',
     :'coolgray8' => '888B8D',
     :'coolgray9' => '75787B',
+    :'coolgray10' => '63666A',
+    :'coolgray11' => '53565A',    
     :'darkblue' => '00239C',
     :'green0921' => '9DE7D7',
     :'green' => '00AB84',
@@ -1542,8 +1550,6 @@ class ColorLib::Pantone
     :'violet0631' => 'BF9BDE',
     :'violet' => '440099',
     :'warmgray1' => 'D7D2CB',
-    :'warmgray10' => '796E65',
-    :'warmgray11' => '6E6259',
     :'warmgray2' => 'CBC4BC',
     :'warmgray3' => 'BFB8AF',
     :'warmgray4' => 'B6ADA5',
@@ -1552,6 +1558,8 @@ class ColorLib::Pantone
     :'warmgray7' => '968C83',
     :'warmgray8' => '8C8279',
     :'warmgray9' => '83786F',
+    :'warmgray10' => '796E65',
+    :'warmgray11' => '6E6259',    
     :'warmred' => 'F9423A',
     :'yellow012' => 'FFD700',
     :'yellow0131' => 'F2F0A1',
