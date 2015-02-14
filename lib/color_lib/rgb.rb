@@ -34,7 +34,7 @@ class ColorLib::RGB
     #   ColorLib::RGB.from_html("#cabbed")
     #   ColorLib::RGB.from_html("cabbed")
     def from_html(html_colour)
-      if from_html.present?
+      if html_colour.present?
         html_colour = html_colour.gsub(%r{[#;]}, '')
         case html_colour.size
         when 3
@@ -47,7 +47,7 @@ class ColorLib::RGB
 
         ColorLib::RGB.new(*colours)
       else
-        nil
+        raise ArgumentError
       end
     end
   end
