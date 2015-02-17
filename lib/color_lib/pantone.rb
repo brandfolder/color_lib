@@ -12,6 +12,12 @@ class ColorLib::Pantone
     elsif value.strip[-2..-1] =~ /\dc/i
         # remove coated version ("C") from end of numerical pantones ("101C")
         value = value.strip.downcase.chomp("c")
+    elsif value.strip[-2..-1] =~ /\ u/i
+        # remove coated version (" U") from end of string
+        value = value.strip.downcase.chomp(" u")
+    elsif value.strip[-2..-1] =~ /\du/i
+        # remove uncoated version ("U") from end of numerical pantones ("101C")
+        value = value.strip.downcase.chomp("u")        
     end
     # remove spaces & downcase for clean match
     value = value.to_s.gsub(/[\ \-]/i, '').downcase
