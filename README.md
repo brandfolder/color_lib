@@ -18,6 +18,10 @@ Or install it yourself as:
 
     $ gem install color_lib## Contributing
 
+And then push it up to Rubygems.org
+    $ bundle exec rake release
+
+
 Usage
 ```ruby
 ColorLib::RGB.new(r, g, b).html
